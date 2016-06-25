@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "#Lectures 5 & 6 - Testing for Significance\n\n##**Parametric tests**\n###Experimental groups may differ for 2 reasons:\n* real effect of intervention\n* random variation between samples drawn from the same population \n* I must decide whether: _1_ is large enough relative to _2_ to conclude that a treatment had an effect.\n\n###Calculate the ratio of variances\n* between-group variance\n* within-group variance \n* If samples are from the same population, the variances will be similar, and have a quotient of 1. \n* **Degrees of Freedom** determine the critical value the ratio (_test statistic_) must reach for the null hypothesis to be rejected. \n\n###Assumptions for parametric tests\n* Gaussian distribution\n* equal variance amongst groups\n* the errors are independent (_the 'error' refers to the differnce between each value and the mean.\n* data are unmatched (_for unpaired data_)/matched (_for repeasted measures data_)\n\n###Student's t-test\n* First I should have a lok at the data:\n\t+ data(_data.set.name_)\n\t+ head(_data.set.name_)\n\t+ boxplot(_variable_~_variable_, data = _data.set.name_)\n* Secondly, run the t-test:\n\t+remember that the default for whether or not data is paired is \"FALSE\".\n\n###Analysis of Variance (ANOVA)\n* Use when the grouping factor is equal to or greater than 3 levels.\n* R does not make it easy to run an ANOVA - use the **aov()** function set to a suitable variable (_foo_ and _bar_ are used below). Then I must use the _summary()_ function to see the output.\n* One-way ANOVA:\n\t+ foo <- aov(_variable_ ~ _variable_, data = _dataframe_)\n\t+ summary(_foo_)\n* One-way repeated-measures ANOVA:\n\t+ bar <- aov(_variable_ ~ _variable_ + Error(\"\"), data = _dataframe_)\n\t+ summary(_bar_)\n\t+ in R, the \"Error\" argument points to the variable you  do not want as an input.\n* Two-way ANOVA\n\t+ This test looks at the effect of two independent variables on the effect of an outcome.\n\n###Post-hoc tests\n* the p value needs to be corrected for multiple comparisons so as to avoid inflation of type 1 error\n* two such tests are used:\n\t+ Bonferroni= _target p value_ / _number of comparisons_\n\t+ Holm= _target p value_ / _n - rank no# in terms of degree of significance + 1\n* pairwise post-hoc tests:\n\t+ pairwise.t.test(_outcome_ $ _variable_ , _outcome_ $ _other.variable_, p.adjust.method = 'bonferroni', paired = FALSE)\n\t+the bonferroni post-hoc test is the easiest to use. It is, however, limited to 4 comparisons. \n\t+ if I do not have to compare all pairs, then I can make a vector of p values from each of the planned comparisons. Then adjust the p values accordingly using the _p.adjust()_ funtion. \n\t\t* p.adjust(_pvalue.vector_, method = 'bonferroni')\n\n##**Non-parametric Tests**\n###Assumptions\n* Like the parametric test, the errors are independent \n* data are unmatched (_for unpaired data_)/ matching is effective (_for repeated measures data_).\n* samples are drawn from populations with the same _shape distributions_\n\n###Comparing 2 groups\n* paired data\n\t+ wilcox.test(_value_ ~ _group_, data = _dataframe_, paired = **TRUE**)\n* for unpaired data, I must use FALSE\n\n###Comparing more than two groups\n* kruskal.test(_value_ ~ _group_, data = _dataframe_)\n* friedman.test(_value_ ~ _group_ | _subjectID_, data = _dataframe_)\n\n\n\n\n\n\n\n\n",
+    "created" : 1466860302050.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2482334335",
+    "id" : "819CD75A",
+    "lastKnownWriteTime" : 1466860399,
+    "last_content_update" : 1466860399570,
+    "path" : "~/STATS STUFF/Practise/Lectures 5 and 6 Significance Testing/Lectures 5 & 6 Testing for Significance.md",
+    "project_path" : null,
+    "properties" : {
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "markdown"
+}
